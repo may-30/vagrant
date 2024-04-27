@@ -1,0 +1,37 @@
+Vagrant.configure("2") do |config|
+    config.vm.boot_timeout = 600
+
+    # master
+    %w{master}.each_with_index do |master_name, master_idx|
+        config.vm.define master_name do |master_node|
+            master_node.vm.provider "vmware_desktop" do |v|
+                v.cpus = 2
+                v.memory = 4096
+                v.gui = false
+                v.linked_clone = false
+            end
+            master_node.vm.box = "bento/ubuntu-20.04"
+            master_node.vm.box_version = "202401.31.0"
+            master_node.vm.hostname = "k8s-#{master_name}"
+            master_node.vm.network "private_network", ip: "10.0.#{master_idx}.#{master_idx + 10}"
+            master_node.vm.provision "shell", path: "scripts/master.sh", env: {"IDX" => "#{master_idx}"}
+        end
+    end
+
+    # cicd
+    %w{cicd}.each_with_index do |cicd_name, cicd_idx|
+        config.vm.define cicd_name do |cicd_node|
+            cicd_node.vm.provider "vmware_desktop" do |v|
+                v.cpus = 2
+                v.memory = 2048
+                v.gui = false
+                v.linked_clone = false
+            end
+            cicd_node.vm.box = "bento/ubuntu-20.04"
+            cicd_node.vm.box_version = "202401.31.0"
+            cicd_node.vm.hostname = "k8s-#{cicd_name}"
+            cicd_node.vm.network "private_network", ip: "10.0.#{cicd_idx}.#{cicd_idx + 50}"
+            cicd_node.vm.provision "shell", path: "scripts/cicd.sh", env: {"IDX" => "#{cicd_idx}"}
+        end
+    end
+end
