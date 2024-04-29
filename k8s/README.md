@@ -44,6 +44,11 @@
 
 - ⚠️ K8s 1대는 master node이며 taint는 자동으로 해제됩니다.
 
+|HostName|IP Range|
+|:--:|:--:|
+|k8s-master|10.0.0.10|
+|k8s-cicd|10.0.0.50|
+
 ---
 
 ## 3. standard
@@ -51,5 +56,11 @@
 - K8s master node 1대
 - K8s worker node 1대
 - CI/CD 전용 서버 1대
+
+|HostName|IP Range|
+|:--:|:--:|
+|k8s-master|10.0.0.10|
+|k8s-worker|10.0.0.100|
+|k8s-cicd|10.0.0.50|
 
 ---
