@@ -10,7 +10,7 @@ Vagrant.configure("2") do |config|
                 v.gui = false
                 v.linked_clone = false
             end
-            master_node.vm.box = "bento/ubuntu-20.04"
+            master_node.vm.box = "bento/ubuntu-22.04"
             master_node.vm.box_version = "202401.31.0"
             master_node.vm.hostname = "k8s-#{master_name}"
             master_node.vm.network "private_network", ip: "10.0.#{master_idx}.#{master_idx + 10}"
@@ -27,7 +27,7 @@ Vagrant.configure("2") do |config|
                 v.gui = false
                 v.linked_clone = false
             end
-            cicd_node.vm.box = "bento/ubuntu-20.04"
+            cicd_node.vm.box = "bento/ubuntu-22.04"
             cicd_node.vm.box_version = "202401.31.0"
             cicd_node.vm.hostname = "k8s-#{cicd_name}"
             cicd_node.vm.network "private_network", ip: "10.0.#{cicd_idx}.#{cicd_idx + 50}"

@@ -31,6 +31,7 @@ ufw disable
 echo "============== 2. docker 설치 =============="
 
 # 2-1. docker 저장소 설정
+echo "============== 2-1. docker 저장소 설정 =============="
 install -m 0755 -d /etc/apt/keyrings
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
 chmod a+r /etc/apt/keyrings/docker.asc
@@ -39,9 +40,10 @@ echo \
   $(. /etc/os-release && echo "$VERSION_CODENAME") stable" | \
   tee /etc/apt/sources.list.d/docker.list > /dev/null
 
-# 2-2. docker-ce 5:26.0.0-1, docker-ce-cli 5:26.0.0-1, containerd 1.6.12-0 설치
+# 2-2. docker-ce 5:24.0.0-1~ubuntu.22.04~jammy, docker-ce-cli 5:24.0.0-1~ubuntu.22.04~jammy, containerd 1.6.12-0 설치
+echo "============== 2-2. docker-ce 5:24.0.0-1~ubuntu.22.04~jammy, docker-ce-cli 5:24.0.0-1~ubuntu.22.04~jammy, containerd 1.6.12-0 설치 =============="
 apt-get update -y
-apt-get install -y docker-ce=5:24.0.0-1~ubuntu.20.04~focal docker-ce-cli=5:24.0.0-1~ubuntu.20.04~focal containerd.io=1.6.21-1
+apt-get install -y docker-ce=5:24.0.0-1~ubuntu.22.04~jammy docker-ce-cli=5:24.0.0-1~ubuntu.22.04~jammy containerd.io=1.6.21-1
 
 systemctl daemon-reload
 systemctl enable docker
@@ -87,8 +89,8 @@ source /etc/profile.d/gradle.sh
 ############################################################
 # 6. git 설치                                               #
 ############################################################
-echo "============== 6. git 1:2.25.1-1 설치 =============="
-apt-get install -y git=1:2.25.1-1ubuntu3.11
+echo "============== 6. git 1:2.34.1-1ubuntu1.10 설치 =============="
+apt-get install -y git=1:2.34.1-1ubuntu1.10
 
 ############################################################
 # 7. jenkins 설치                                           #
